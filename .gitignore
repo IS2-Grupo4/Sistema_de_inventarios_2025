@@ -1,4 +1,8 @@
 comandos_git.txt
+esquema_producto_pydantic
+__pycache__
+
+
 Backend/venv/
 
 # Entornos virtuales de Python
@@ -42,3 +46,4 @@ coverage.xml
 # Sistema operativo
 .DS_Store
 Thumbs.db
+main
