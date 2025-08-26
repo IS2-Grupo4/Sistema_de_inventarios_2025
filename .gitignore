@@ -1,2 +1,44 @@
 comandos_git.txt
 Backend/venv/
+
+# Entornos virtuales de Python
+venv/
+.venv/
+env/
+ENV/
+
+# Archivos de entorno
+.env
+*.env
+.env.*
+
+# Cachés de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Directorios de paquetes/build
+build/
+dist/
+*.egg-info/
+
+# Coverages / test
+.coverage
+htmlcov/
+coverage.xml
+.pytest_cache/
+
+# Logs
+*.log
+
+# IDEs / editores comunes
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.sw?
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
