@@ -1,0 +1,9 @@
+fastapi[standard]
+pyjwt
+pydantic[dotenv]
+sqlalchemy
+alembic
+pydantic[dotenv]
+passlib[bcrypt]
+pytest
+httpx
