@@ -1,5 +1,5 @@
 class ProductoORM:
-    def __init__(self, producto_id: int, nombre: str, descripcion: str, precio: float, stock: int):
+    def __init__(self, producto_id: int, nombre: str,sku: str, descripcion: str, precio: float, stock: int):
         self.producto_id = producto_id
         self.nombre = nombre
         self.descripcion = descripcion
