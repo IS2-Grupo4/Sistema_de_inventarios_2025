@@ -1,14 +1,19 @@
 from typing import List
-from Producto import ProductoORM
+from app.db.models_ORM.product import Producto
 
-productos: List[ProductoORM] = []
+productos: List[Producto] = []
 def crearProducto():
     producto_id = len(productos) + 1
     nombre = input("Nombre del producto: ")
     descripcion = input("Descripción: ")
     precio = float(input("Precio: "))
     stock = int(input("Stock inicial: "))
-    newProducto = ProductoORM(producto_id, nombre, descripcion, precio, stock) 
+    newProducto = Producto(id= producto_id,
+                            nombre =nombre,
+                             descripcion = descripcion,
+                              precio= precio,
+                              stock= stock
+                              ) 
     productos.append(newProducto)
 
 def listarProducto():
