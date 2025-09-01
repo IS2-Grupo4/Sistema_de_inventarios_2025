@@ -1,7 +1,9 @@
 from typing import List
-from app.db.models_ORM.product import Producto
+from app.domain.product import Producto
 
 productos: List[Producto] = []
+
+
 def crearProducto():
     producto_id = len(productos) + 1
     nombre = input("Nombre del producto: ")
@@ -14,14 +16,19 @@ def crearProducto():
                               precio= precio,
                               stock= stock
                               ) 
+    newProducto.validar()
     productos.append(newProducto)
+    print(f"Producto '{newProducto.nombre}' creado con éxito.\n")
+
 
 def listarProducto():
     if not productos:
         print("La lista de productos esta vacía\n")
         return
+    print("\n=== LISTA DE PRODUCTOS ===")
     for p in productos:
             print(p)
+
 def borrarProducto():
     if not productos:
         print("No hay productos para borrar\n")
@@ -58,4 +65,4 @@ while True:
          elif opcion==3:
              borrarProducto()
      except ValueError:
-        print("Ingrese un numero\n")     
+        print("Ingrese un número válido.\n")     
