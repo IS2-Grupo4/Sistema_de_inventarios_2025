@@ -1,0 +1,56 @@
+from typing import List
+from Producto import ProductoORM
+
+productos: List[ProductoORM] = []
+def crearProducto():
+    producto_id = len(productos) + 1
+    nombre = input("Nombre del producto: ")
+    descripcion = input("Descripción: ")
+    precio = float(input("Precio: "))
+    stock = int(input("Stock inicial: "))
+    newProducto = ProductoORM(producto_id, nombre, descripcion, precio, stock) 
+    productos.append(newProducto)
+
+def listarProducto():
+    if not productos:
+        print("La lista de productos esta vacía\n")
+        return
+    for p in productos:
+            print(p)
+def borrarProducto():
+    if not productos:
+        print("No hay productos para borrar\n")
+        return
+    listarProducto()
+    try:
+        producto_id = int(input("Ingrese el ID del producto a borrar: "))
+        for p in productos:
+            if p.producto_id == producto_id:
+                productos.remove(p)
+                print(f"Producto '{p.nombre}' eliminado\n")
+                return        
+        print("No existe un producto con ese ID\n")    
+    except ValueError:
+        print("Ingrese un numero\n")
+
+while True:
+     try:  
+         print("0_Salir")
+         print("1_Crear produtos")
+         print("2_Listar produtos")
+         print("3_Borar productos\n")
+         opcion=int(input("Elige una opcion: ")) 
+         if opcion==0:
+              break
+         elif opcion==1:
+            while True:
+                crearProducto()
+                salir=input("Para dejar de crear productos presione x :").lower()
+                if salir=="x":
+                     break
+         elif opcion==2:
+              listarProducto()
+         elif opcion==3:
+             borrarProducto()
+     except ValueError:
+        print("Ingrese un numero\n")     
