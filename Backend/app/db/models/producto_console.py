@@ -95,7 +95,7 @@ while True:
          print("0_Salir")
          print("1_Crear produtos")
          print("2_Listar produtos")
-         print("3_Borar productos\n")
+         print("3_Borrar productos\n")
          print("4. Actualizar productos\n")
          opcion=int(input("Elige una opcion: ")) 
          if opcion==0:
