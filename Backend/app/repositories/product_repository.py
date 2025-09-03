@@ -36,10 +36,17 @@ class ProductoRepository:
 
         """
 
-        total_items = query.count()   # Primera Query
-        total_pages = (total_items + limit - 1) // limit  # redondeo hacia arriba
+        total_items = query.count()   # Primera Query, cuenta el total de registros.
+
+        total_pages = (total_items + limit - 1) // limit  # Formula para obtener el total de "paginas"
 
         productos_orm = query.offset((page - 1) * limit).limit(limit).all()     #Segunda Query
+        
+        """
+        #El metodo offser(N), ignora los primeros N registros que le indiquemos. Si le concatenamos el metodo limit().
+        Estamos creando una consulta que va a traer los primeros 10 registros que haya desde la pagina que le indiquemos.
+
+        """
 
         productos = [orm_a_dominio(p) for p in productos_orm]   #La query devolvio una lista de objetos ProductoORM, aca se transforman a modelos de dominio.
 

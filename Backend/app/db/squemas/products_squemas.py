@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from typing import List
 
 class ProductoCreate(BaseModel):
     nombre: str
@@ -15,3 +16,10 @@ class ProductoResponse(BaseModel):
     stock: int
     stock_minimo: int
     descripcion: str | None
+
+class PaginacionProductos(BaseModel):
+    page: int
+    limit: int
+    total_items: int
+    total_pages: int
+    items: List[ProductoResponse]
