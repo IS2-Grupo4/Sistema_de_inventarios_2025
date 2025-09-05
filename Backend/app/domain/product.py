@@ -1,5 +1,5 @@
 class Producto:
-    def __init__(self, id: int, nombre: str, sku: str, stock: int, 
+    def __init__(self, id:int, nombre: str, sku: str, stock: int, 
                  stock_minimo: int, descripcion: str):
         self.id = id
         self.nombre = nombre
@@ -7,13 +7,14 @@ class Producto:
         self.stock = stock
         self.stock_minimo = stock_minimo
         self.descripcion = descripcion
+
+        self.validar()
+
+    def __str__(self):
+        return f"ID: {self.id}\nNombre: {self.nombre}\nSKU: {self.sku}\nStock: {self.stock}\nStock minimo: {self.stock_minimo}\nDescripcion: {self.descripcion}"
     
-    def validar(self, productos_existentes: list = None):
-        """
-        Valida que el producto cumpla con las reglas básicas
-        y que no se duplique nombre ni SKU.
-        """
-        # Validaciones básicas
+    def validar(self):
+        """Valida que el producto cumpla con las reglas básicas"""
         if not self.nombre or len(self.nombre.strip()) == 0:
             raise ValueError("El producto debe tener un nombre")
         
@@ -26,16 +27,10 @@ class Producto:
         if self.stock_minimo < 0:
             raise ValueError("El stock mínimo no puede ser negativo")
         
-        if self.stock < self.stock_minimo :
-            raise ValueError("El stock es menor al stock minimo")
-
-        # Validaciones de duplicados
-        if productos_existentes:
-            for p in productos_existentes:
-                if p.nombre.lower() == self.nombre.lower():
-                    raise ValueError(f"Ya existe un producto con el nombre '{self.nombre}'")
-                if p.sku.lower() == self.sku.lower():
-                    raise ValueError(f"Ya existe un producto con el SKU '{self.sku}'")
+        if not self.sku or len(self.nombre.strip()) == 0:
+            raise ValueError("El producto debe tener un SKU")
+        
+        
     
     def actualizar_stock(self, nueva_cantidad: int):
         """Actualiza la cantidad de stock"""

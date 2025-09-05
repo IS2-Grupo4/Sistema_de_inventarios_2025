@@ -1,5 +1,5 @@
-from domain.product import Producto as ProductoDominio
-from db.models_ORM.product_orm import ProductoORM
+from app.domain.product import Producto as ProductoDominio
+from app.db.models_ORM.product_orm import ProductoORM
 
 def orm_a_dominio(orm: ProductoORM) -> ProductoDominio:
     return ProductoDominio(
