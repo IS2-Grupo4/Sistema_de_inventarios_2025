@@ -8,6 +8,22 @@ class ProductoRepository:
     def __init__(self, session: Session):
         self.session = session
 
+    def existe_nombre_o_sku(self, nombre: str, sku: str) -> bool:
+        # 1️⃣ Hago la consulta
+        query = self.session.query(ProductoORM)
+
+        # 2️⃣ Aplico el filtro (nombre igual o sku igual)
+        query = query.filter((ProductoORM.nombre == nombre) | (ProductoORM.sku == sku))
+
+        # 3️⃣ Ejecuto y obtengo el primer resultado
+        registro = query.first()
+
+        # 4️⃣ Verifico si se encontró algo
+        if registro:
+            return True
+        return False
+    
+
     def obtener_por_id(self, producto_id: int) -> Producto | None:
 
         orm_obj = self.session.get(ProductoORM, producto_id)
@@ -38,6 +54,9 @@ class ProductoRepository:
 
         total_items = query.count()   # Primera Query, cuenta el total de registros.
 
+        if not total_items:
+            return False
+
         total_pages = (total_items + limit - 1) // limit  # Formula para obtener el total de "paginas"
 
         productos_orm = query.offset((page - 1) * limit).limit(limit).all()     #Segunda Query
@@ -58,13 +77,14 @@ class ProductoRepository:
             "items": productos
         }
 
-        
-
-
 
 
     def agregar(self, producto: Producto) -> Producto:
         orm_obj = dominio_a_orm(producto)
+
+        if self.existe_nombre_o_sku(orm_obj.nombre, orm_obj.sku):
+            raise Exception("Ya existe un producto con ese nombre o SKU")
+
         self.session.add(orm_obj)
         self.session.commit()
         self.session.refresh(orm_obj)
@@ -95,3 +115,5 @@ class ProductoRepository:
         
         self.session.delete(orm_obj)
         self.session.commit()
+
+        return True
